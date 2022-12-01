@@ -1,12 +1,15 @@
-use advent_of_code_2022::day1;
+use exitfailure::ExitFailure;
 use std::env;
 use std::fs;
 
-fn main() {
+use advent_of_code_2022::day2;
+
+fn main() -> Result<(), ExitFailure> {
     let args: Vec<String> = env::args().collect();
     if let Ok(input) = fs::read_to_string(&args[1]) {
-        println!("{:?}", day1::calculate_calories_top_three(&input))
+        println!("{:?}", day2::calculate(&input))
     } else {
         println!("ERROR")
     }
+    Ok(())
 }
