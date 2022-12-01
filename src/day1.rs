@@ -14,18 +14,18 @@ pub fn calculate_calories(slice: &str) -> u32 {
 }
 
 pub fn calculate_calories_top_three(slice: &str) -> u32 {
-    let mut n = slice
+    let mut output = slice
         .trim()
         .split("\n\n")
-        .map(|sub| {
-            sub.trim()
+        .map(|calories| {
+            calories
                 .split("\n")
-                .map(|num| num.parse::<u32>().unwrap())
+                .map(|calorie| str::parse::<u32>(calorie).unwrap())
                 .sum::<u32>()
         })
         .collect::<Vec<u32>>();
-    n.sort_by(|a, b| b.cmp(a));
-    [n[0], n[1], n[2]].iter().sum()
+    output.sort();
+    output.iter().rev().take(3).sum()
 }
 
 #[cfg(test)]
