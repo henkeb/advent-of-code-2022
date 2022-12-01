@@ -1,7 +1,7 @@
 # advent-of-code-2022
 [Link here](https://adventofcode.com/2022)
 
-- [ ] [Day 1]()
+- [x] [Day 1](https://adventofcode.com/2022/day/1)
 - [ ] [Day 2]()
 - [ ] [Day 3]()
 - [ ] [Day 4]()
