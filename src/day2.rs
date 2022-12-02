@@ -54,13 +54,13 @@ pub fn calculate(slice: &str) -> Result<(i32, i32), ()> {
             let elf_1 = Sign::from_str(elf).unwrap();
             let you_2 = Sign::from_str(you).unwrap();
             (
-                acc_part1 + points_per_round(&elf_1, &you_2).unwrap(),
-                acc_part2 + points_per_round_part2(&elf_1, &you_2).unwrap(),
+                acc_part1 + points_per_round(&elf_1, &you_2),
+                acc_part2 + points_per_round_part2(&elf_1, &you_2),
             )
         }))
 }
 
-fn points_per_round(elf: &Sign, you: &Sign) -> Result<i32, ()> {
+fn points_per_round(elf: &Sign, you: &Sign) -> i32 {
     let point = match (elf, you) {
         (Sign::Rock, Sign::Paper) => MatchResults::Win.value(),
         (Sign::Rock, Sign::Scissors) => MatchResults::Loss.value(),
@@ -68,21 +68,22 @@ fn points_per_round(elf: &Sign, you: &Sign) -> Result<i32, ()> {
         (Sign::Paper, Sign::Scissors) => MatchResults::Win.value(),
         (Sign::Scissors, Sign::Rock) => MatchResults::Win.value(),
         (Sign::Scissors, Sign::Paper) => MatchResults::Loss.value(),
-        (elf, you) if elf == you => MatchResults::Draw.value(),
-        _ => return Err(()),
+        (Sign::Rock, Sign::Rock) => MatchResults::Loss.value(),
+        (Sign::Paper, Sign::Paper) => MatchResults::Loss.value(),
+        (Sign::Scissors, Sign::Scissors) => MatchResults::Loss.value(),
     };
-    Ok(point + you.value())
+    point + you.value()
 }
 
-fn points_per_round_part2(elf: &Sign, you: &Sign) -> Result<i32, ()> {
+fn points_per_round_part2(elf: &Sign, you: &Sign) -> i32 {
     match (elf, you) {
-        (Sign::Rock, Sign::Rock) => Ok(MatchResults::Loss.value() + Sign::Scissors.value()),
-        (Sign::Paper, Sign::Rock) => Ok(MatchResults::Loss.value() + Sign::Rock.value()),
-        (Sign::Scissors, Sign::Rock) => Ok(MatchResults::Loss.value() + Sign::Paper.value()),
-        (elf, Sign::Paper) => Ok(MatchResults::Draw.value() + elf.value()),
-        (Sign::Rock, Sign::Scissors) => Ok(MatchResults::Win.value() + Sign::Paper.value()),
-        (Sign::Paper, Sign::Scissors) => Ok(MatchResults::Win.value() + Sign::Scissors.value()),
-        (Sign::Scissors, Sign::Scissors) => Ok(MatchResults::Win.value() + Sign::Rock.value()),
+        (Sign::Rock, Sign::Rock) => MatchResults::Loss.value() + Sign::Scissors.value(),
+        (Sign::Paper, Sign::Rock) => MatchResults::Loss.value() + Sign::Rock.value(),
+        (Sign::Scissors, Sign::Rock) => MatchResults::Loss.value() + Sign::Paper.value(),
+        (elf, Sign::Paper) => MatchResults::Draw.value() + elf.value(),
+        (Sign::Rock, Sign::Scissors) => MatchResults::Win.value() + Sign::Paper.value(),
+        (Sign::Paper, Sign::Scissors) => MatchResults::Win.value() + Sign::Scissors.value(),
+        (Sign::Scissors, Sign::Scissors) => MatchResults::Win.value() + Sign::Rock.value(),
     }
 }
 
@@ -100,7 +101,7 @@ C Z";
 
     #[test]
     fn calculate_rock_win() {
-        assert_eq!(points_per_round(&Sign::Scissors, &Sign::Rock), Ok(7));
+        assert_eq!(points_per_round(&Sign::Scissors, &Sign::Rock), 7);
     }
 }
 
