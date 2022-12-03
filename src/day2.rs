@@ -68,9 +68,9 @@ fn points_per_round(elf: &Sign, you: &Sign) -> i32 {
         (Sign::Paper, Sign::Scissors) => MatchResults::Win.value(),
         (Sign::Scissors, Sign::Rock) => MatchResults::Win.value(),
         (Sign::Scissors, Sign::Paper) => MatchResults::Loss.value(),
-        (Sign::Rock, Sign::Rock) => MatchResults::Loss.value(),
-        (Sign::Paper, Sign::Paper) => MatchResults::Loss.value(),
-        (Sign::Scissors, Sign::Scissors) => MatchResults::Loss.value(),
+        (Sign::Rock, Sign::Rock) => MatchResults::Draw.value(),
+        (Sign::Paper, Sign::Paper) => MatchResults::Draw.value(),
+        (Sign::Scissors, Sign::Scissors) => MatchResults::Draw.value(),
     };
     point + you.value()
 }
