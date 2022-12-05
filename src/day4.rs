@@ -65,10 +65,4 @@ mod tests {
 ";
         assert_eq!(calculate_2(&input), 4);
     }
-
-    #[test]
-    fn try_input() {
-        let input = "2-3,4-5";
-        println!("{:?}", input.split(&['-', ',']));
-    }
 }
