@@ -9,7 +9,7 @@ fn is_overlapping(first: &RangeInclusive<u32>, second: &RangeInclusive<u32>) -> 
     ((first.start() >= second.start() && first.end() <= second.end())
         || (first.end() >= second.start() && first.end() <= second.end()))
         || ((second.start() >= first.start() && second.end() <= first.end())
-            || second.end() >= first.start() && second.end() <= first.end())
+            || (second.end() >= first.start() && second.end() <= first.end()))
 }
 
 pub fn calculate(slice: &str) -> usize {
