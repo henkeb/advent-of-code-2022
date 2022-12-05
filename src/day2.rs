@@ -51,11 +51,11 @@ pub fn calculate(slice: &str) -> Result<(i32, i32), ()> {
         .lines()
         .map(|round| round.split_once(" ").unwrap())
         .fold((0, 0), |(acc_part1, acc_part2), (elf, you)| {
-            let elf_1 = Sign::from_str(elf).unwrap();
-            let you_2 = Sign::from_str(you).unwrap();
+            let elf_parsed = elf.parse::<Sign>().unwrap();
+            let you_parsed = you.parse::<Sign>().unwrap();
             (
-                acc_part1 + points_per_round(&elf_1, &you_2),
-                acc_part2 + points_per_round_part2(&elf_1, &you_2),
+                acc_part1 + points_per_round(&elf_parsed, &you_parsed),
+                acc_part2 + points_per_round_part2(&elf_parsed, &you_parsed),
             )
         }))
 }
