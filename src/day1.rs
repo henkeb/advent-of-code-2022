@@ -1,5 +1,5 @@
 pub fn calculate_calories(slice: &str) -> u32 {
-    let output = slice
+    slice
         .trim()
         .split("\n\n")
         .map(|calories| {
@@ -9,8 +9,7 @@ pub fn calculate_calories(slice: &str) -> u32 {
                 .sum()
         })
         .max()
-        .unwrap();
-    output
+        .unwrap()
 }
 
 pub fn calculate_calories_top_three(slice: &str) -> u32 {
