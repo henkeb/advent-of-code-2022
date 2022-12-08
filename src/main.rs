@@ -34,7 +34,12 @@ fn main() {
                 advent_of_code_2022::day6::calculate(&input, 4).unwrap(),
                 advent_of_code_2022::day6::calculate(&input, 14).unwrap()
             ),
-            day => println!("Implementation does not exist for: {}", day),
+            "day7" => println!(
+                "Part1: {}\nPart2: {}",
+                advent_of_code_2022::day7::calculate(&input),
+                advent_of_code_2022::day7::calculate_part2(&input)
+            ),
+            _ => (),
         }
     } else {
         println!("Could not read input file");
