@@ -49,8 +49,8 @@ fn main() {
             "day9" => {
                 println!(
                     "Part1: {}\nPart2: {}",
-                    advent_of_code_2022::day9::calculate(&input),
-                    advent_of_code_2022::day9::calculate_part2(&input)
+                    advent_of_code_2022::day9::calculate(&input, 2),
+                    advent_of_code_2022::day9::calculate(&input, 10),
                 )
             }
             _ => (),
