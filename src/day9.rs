@@ -93,38 +93,15 @@ fn print_map(map: &Vec<Vec<bool>>) {
 }
 
 fn do_movements(objects: &mut Vec<RopeObject>, map: &mut Vec<Vec<bool>>, instruction: &Movement) {
-    match instruction.direction {
-        Direction::Up => {
-            for _ in 0..instruction.steps {
-                objects[0].position.y -= 1;
-                for i in 1..objects.len() {
-                    do_movement_tail(objects, i, map);
-                }
-            }
+    for _ in 0..instruction.steps {
+        match instruction.direction {
+            Direction::Up => objects[0].position.y -= 1,
+            Direction::Down => objects[0].position.y += 1,
+            Direction::Left => objects[0].position.x -= 1,
+            Direction::Right => objects[0].position.x += 1,
         }
-        Direction::Down => {
-            for _ in 0..instruction.steps {
-                objects[0].position.y += 1;
-                for i in 1..objects.len() {
-                    do_movement_tail(objects, i, map);
-                }
-            }
-        }
-        Direction::Left => {
-            for _ in 0..instruction.steps {
-                objects[0].position.x -= 1;
-                for i in 1..objects.len() {
-                    do_movement_tail(objects, i, map);
-                }
-            }
-        }
-        Direction::Right => {
-            for _ in 0..instruction.steps {
-                objects[0].position.x += 1;
-                for i in 1..objects.len() {
-                    do_movement_tail(objects, i, map);
-                }
-            }
+        for i in 1..objects.len() {
+            do_movement_tail(objects, i, map);
         }
     }
 }
@@ -137,16 +114,6 @@ fn do_movement_tail(
     let objects_len = objects.len() - 1;
     let head = objects[current_active - 1];
     let mut tail = &mut objects[current_active];
-    //println!("Head: {:?}", head);
-    //println!("Tail: {:?}", tail);
-    //println!(
-    //"Diff x: {}",
-    //head.position.x as i32 - tail.position.x as i32
-    //);
-    //println!(
-    //"Diff y: {}",
-    //head.position.y as i32 - tail.position.y as i32
-    //);
 
     match (
         head.position.x as i32 - tail.position.x as i32,
