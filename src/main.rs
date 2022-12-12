@@ -60,8 +60,8 @@ fn main() {
             "day11" => {
                 println!(
                     "Part1: {}\nPart2: {}",
-                    advent_of_code_2022::day11::calculate(&input),
-                    advent_of_code_2022::day11::calculate_part2(&input)
+                    advent_of_code_2022::day11::calculate(&input, 20),
+                    advent_of_code_2022::day11::calculate_part2(&input, 10_000)
                 );
             }
             _ => (),

@@ -72,71 +72,52 @@ fn parse_input(slice: &str) -> Vec<Monkey> {
         .collect::<Vec<Monkey>>()
 }
 
-pub fn calculate(slice: &str) -> usize {
-    let mut monkeys: Vec<Monkey> = parse_input(slice);
-
-    for _ in 0..20 {
+fn monkey_business(monkeys: &mut Vec<Monkey>, rounds: usize, worry: impl Fn(usize) -> usize) {
+    for _ in 0..rounds {
         for monkey in 0..monkeys.len() {
-            for _ in 0..monkeys[monkey].items.len() {
-                let mut item = monkeys[monkey].items.pop_front().unwrap();
-                item = monkeys[monkey].worry_calculation(item);
-                item /= 3;
-                if item % monkeys[monkey].item_rule.divisor == 0 {
-                    let to_monkey = monkeys[monkey].item_rule.success;
-                    monkeys[to_monkey].items.push_back(item);
-                } else {
-                    let to_monkey = monkeys[monkey].item_rule.fail;
-                    monkeys[to_monkey].items.push_back(item);
-                }
+            while let Some(mut item) = monkeys[monkey].items.pop_front() {
                 monkeys[monkey].inspections += 1;
+
+                item = monkeys[monkey].worry_calculation(item);
+                item = worry(item);
+
+                let throw_at = if item % monkeys[monkey].item_rule.divisor == 0 {
+                    monkeys[monkey].item_rule.success
+                } else {
+                    monkeys[monkey].item_rule.fail
+                };
+
+                monkeys[throw_at].items.push_back(item);
             }
         }
     }
+}
 
+fn get_score(monkeys: Vec<Monkey>) -> usize {
     let mut inspections = monkeys
         .into_iter()
         .map(|monkey| monkey.inspections)
         .collect::<Vec<usize>>();
 
     inspections.sort();
-    println!("Inspections {:?}", inspections);
     inspections.iter().rev().take(2).product()
 }
 
-pub fn calculate_part2(slice: &str) -> usize {
+pub fn calculate(slice: &str, rounds: usize) -> usize {
     let mut monkeys: Vec<Monkey> = parse_input(slice);
+    monkey_business(&mut monkeys, rounds, |x| x / 3);
+    get_score(monkeys)
+}
 
+pub fn calculate_part2(slice: &str, rounds: usize) -> usize {
+    let mut monkeys: Vec<Monkey> = parse_input(slice);
     let lcd: usize = monkeys
         .iter()
         .map(|monkey| monkey.item_rule.divisor)
         .product();
 
-    for _ in 0..10_000 {
-        for monkey in 0..monkeys.len() {
-            for _ in 0..monkeys[monkey].items.len() {
-                let mut item = monkeys[monkey].items.pop_front().unwrap();
-                item = monkeys[monkey].worry_calculation(item);
-                item %= lcd;
-                if item % monkeys[monkey].item_rule.divisor == 0 {
-                    let to_monkey = monkeys[monkey].item_rule.success;
-                    monkeys[to_monkey].items.push_back(item);
-                } else {
-                    let to_monkey = monkeys[monkey].item_rule.fail;
-                    monkeys[to_monkey].items.push_back(item);
-                }
-                monkeys[monkey].inspections += 1;
-            }
-        }
-    }
-
-    let mut inspections = monkeys
-        .into_iter()
-        .map(|monkey| monkey.inspections)
-        .collect::<Vec<usize>>();
-
-    inspections.sort();
-    println!("Inspections {:?}", inspections);
-    inspections.iter().rev().take(2).product()
+    monkey_business(&mut monkeys, rounds, |x| x % lcd);
+    get_score(monkeys)
 }
 
 #[cfg(test)]
@@ -179,6 +160,6 @@ Monkey 3:
 
     #[test]
     fn calculate_part1() {
-        assert_eq!(calculate(INPUT), 10605);
+        assert_eq!(calculate(INPUT, 20), 10605);
     }
 }
