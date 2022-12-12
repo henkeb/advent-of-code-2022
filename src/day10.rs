@@ -67,7 +67,6 @@ pub fn calculate(slice: &str) -> i32 {
 
 pub fn calculate_part2(slice: &str) {
     let instructions = parse_input(slice);
-    let mut clock = 0;
     let mut register_x = 1;
     let mut sprite_clock = 0;
 
@@ -84,7 +83,6 @@ pub fn calculate_part2(slice: &str) {
             } else {
                 sprite_clock += 1;
             }
-            clock += 1;
         }
         match instruction.0.operation {
             Operation::Addx => register_x += instruction.1.unwrap(),

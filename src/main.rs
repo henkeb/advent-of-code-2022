@@ -57,6 +57,13 @@ fn main() {
                 println!("Part1: {}\n", advent_of_code_2022::day10::calculate(&input),);
                 advent_of_code_2022::day10::calculate_part2(&input);
             }
+            "day11" => {
+                println!(
+                    "Part1: {}\nPart2: {}",
+                    advent_of_code_2022::day11::calculate(&input),
+                    advent_of_code_2022::day11::calculate_part2(&input)
+                );
+            }
             _ => (),
         }
     } else {
