@@ -8,7 +8,7 @@
 - [x] [Day 7](https://adventofcode.com/2022/day/7)
 - [x] [Day 8](https://adventofcode.com/2022/day/8)
 - [x] [Day 9](https://adventofcode.com/2022/day/9)
-- [ ] [Day 10]()
+- [x] [Day 10](https://adventofcode.com/2022/day/10)
 - [ ] [Day 11]()
 - [ ] [Day 12]()
 - [ ] [Day 13]()

@@ -79,18 +79,18 @@ fn parse_input(slice: &str) -> Vec<Movement> {
         .collect()
 }
 
-fn print_map(map: &Vec<Vec<bool>>) {
-    println!();
-    for (y, row) in map.iter().enumerate() {
-        for (x, _) in row.iter().enumerate() {
-            match map[y][x] {
-                true => print!("#"),
-                false => print!("-"),
-            }
-        }
-        print!("\n");
-    }
-}
+//fn print_map(map: &Vec<Vec<bool>>) {
+//println!();
+//for (y, row) in map.iter().enumerate() {
+//for (x, _) in row.iter().enumerate() {
+//match map[y][x] {
+//true => print!("#"),
+//false => print!("-"),
+//}
+//}
+//print!("\n");
+//}
+//}
 
 fn do_movements(objects: &mut Vec<RopeObject>, map: &mut Vec<Vec<bool>>, instruction: &Movement) {
     for _ in 0..instruction.steps {
