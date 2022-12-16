@@ -66,8 +66,9 @@ fn main() {
             }
             "day12" => {
                 println!(
-                    "Part1: {}",
-                    advent_of_code_2022::day12::calculate(&input).unwrap()
+                    "Part1: {}\nPart2: {}",
+                    advent_of_code_2022::day12::calculate(&input).unwrap(),
+                    advent_of_code_2022::day12::calculate_part2(&input).unwrap()
                 );
             }
             _ => (),
