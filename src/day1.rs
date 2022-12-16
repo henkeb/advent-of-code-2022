@@ -4,7 +4,7 @@ pub fn calculate_calories(slice: &str) -> u32 {
         .split("\n\n")
         .map(|calories| {
             calories
-                .split("\n")
+                .split('\n')
                 .map(|calorie| str::parse::<u32>(calorie).unwrap())
                 .sum()
         })
@@ -18,7 +18,7 @@ pub fn calculate_calories_top_three(slice: &str) -> u32 {
         .split("\n\n")
         .map(|calories| {
             calories
-                .split("\n")
+                .split('\n')
                 .map(|calorie| str::parse::<u32>(calorie).unwrap())
                 .sum::<u32>()
         })

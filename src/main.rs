@@ -64,6 +64,12 @@ fn main() {
                     advent_of_code_2022::day11::calculate_part2(&input, 10_000)
                 );
             }
+            "day12" => {
+                println!(
+                    "Part1: {}",
+                    advent_of_code_2022::day12::calculate(&input).unwrap()
+                );
+            }
             _ => (),
         }
     } else {
