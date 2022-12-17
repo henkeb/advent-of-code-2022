@@ -78,6 +78,13 @@ fn main() {
                     advent_of_code_2022::day13::calculate_part2(&input)
                 );
             }
+            "day14" => {
+                println!(
+                    "Part1: {}\nPart2: {}",
+                    advent_of_code_2022::day14::calculate(&input, true),
+                    advent_of_code_2022::day14::calculate(&input, false)
+                );
+            }
             _ => (),
         }
     } else {
