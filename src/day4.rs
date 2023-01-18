@@ -51,7 +51,7 @@ mod tests {
 6-6,4-6
 2-6,4-8
 ";
-        assert_eq!(calculate(&input), 2);
+        assert_eq!(calculate(input), 2);
     }
 
     #[test]
@@ -63,6 +63,6 @@ mod tests {
 6-6,4-6
 2-6,4-8
 ";
-        assert_eq!(calculate_2(&input), 4);
+        assert_eq!(calculate_2(input), 4);
     }
 }
